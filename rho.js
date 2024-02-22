@@ -1,9 +1,5 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
-// Specify the dimensions of the chart.
-const width = 928;
-const height = 600;
-
 // Specify the color scale.
 const color = d3.scaleOrdinal(d3.schemeCategory10);
 
@@ -23,7 +19,10 @@ fetch("http://127.0.0.1:5500/miserables.json")
         d3.forceLink(links).id((d) => d.id)
       )
       .force("charge", d3.forceManyBody())
-      .force("center", d3.forceCenter(width / 2, height / 2))
+      .force(
+        "center",
+        d3.forceCenter(window.innerWidth / 2, window.innerHeight / 2)
+      )
       .on("tick", ticked);
 
     const svg = d3
@@ -63,6 +62,12 @@ fetch("http://127.0.0.1:5500/miserables.json")
         .on("drag", dragged)
         .on("end", dragEnded)
     );
+
+    window.addEventListener("resize", (event) => {
+      simulation.force("center").x(window.innerWidth / 2);
+      simulation.force("center").y(window.innerHeight / 2);
+      simulation.alphaTarget(0).restart();
+    });
 
     // Set the position attributes of links and nodes each time the simulation ticks.
     function ticked() {
