@@ -10,12 +10,12 @@ const color = d3.scaleOrdinal(d3.schemeCategory10);
 fetch("http://127.0.0.1:5500/miserables.json")
   .then((res) => res.json())
   .then((data) => {
+    console.log(data);
     // The force simulation mutates links and nodes, so create a copy
     // so that re-evaluating this cell produces the same result.
     const links = data.links.map((d) => ({ ...d }));
     const nodes = data.nodes.map((d) => ({ ...d }));
 
-    // Create a simulation with several forces.
     const simulation = d3
       .forceSimulation(nodes)
       .force(
@@ -26,13 +26,12 @@ fetch("http://127.0.0.1:5500/miserables.json")
       .force("center", d3.forceCenter(width / 2, height / 2))
       .on("tick", ticked);
 
-    // Create the SVG container.
     const svg = d3
       .create("svg")
-      .attr("width", width)
-      .attr("height", height)
-      .attr("viewBox", [0, 0, width, height])
-      .attr("style", "max-width: 100%; height: auto;");
+      .attr("height", "100%")
+      .attr("width", "100%")
+      .attr("display", "block")
+      .style("background", "black");
 
     // Add a line for each link, and a circle for each node.
     const link = svg
@@ -60,9 +59,9 @@ fetch("http://127.0.0.1:5500/miserables.json")
     node.call(
       d3
         .drag()
-        .on("start", dragstarted)
+        .on("start", dragStarted)
         .on("drag", dragged)
-        .on("end", dragended)
+        .on("end", dragEnded)
     );
 
     // Set the position attributes of links and nodes each time the simulation ticks.
@@ -77,7 +76,7 @@ fetch("http://127.0.0.1:5500/miserables.json")
     }
 
     // Reheat the simulation when drag starts, and fix the subject position.
-    function dragstarted(event) {
+    function dragStarted(event) {
       if (!event.active) simulation.alphaTarget(0.3).restart();
       event.subject.fx = event.subject.x;
       event.subject.fy = event.subject.y;
@@ -91,16 +90,11 @@ fetch("http://127.0.0.1:5500/miserables.json")
 
     // Restore the target alpha so the simulation cools after dragging ends.
     // Unfix the subject position now that it’s no longer being dragged.
-    function dragended(event) {
+    function dragEnded(event) {
       if (!event.active) simulation.alphaTarget(0);
       event.subject.fx = null;
       event.subject.fy = null;
     }
-
-    // When this cell is re-run, stop the previous simulation. (This doesn’t
-    // really matter since the target alpha is zero and the simulation will
-    // stop naturally, but it’s a good practice.)
-    // invalidation.then(() => simulation.stop());
 
     container.append(svg.node());
   });
