@@ -1,6 +1,6 @@
 html,
 body,
-#container {
+main {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -15,12 +15,15 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   background: black;
   color: inherit;
+  width: fit-content;
+  border: none;
   -moz-appearance: textfield; /* Firefox */
 }
 
-#menu {
+footer {
   color: white;
   position: fixed;
-  bottom: 0;
-  left: 0;
+  bottom: 0.2em;
+  left: 0.2em;
+  font-family: "Fira Mono", monospace;
 }

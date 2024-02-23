@@ -101,5 +101,5 @@ fetch("http://127.0.0.1:5500/miserables.json")
       event.subject.fy = null;
     }
 
-    container.append(svg.node());
+    document.querySelector("main").append(svg.node());
   });
