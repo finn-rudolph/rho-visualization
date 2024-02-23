@@ -20,7 +20,10 @@ const simulation = d3
   .forceSimulation(nodes)
   .force(
     "link",
-    d3.forceLink(links).id((d) => d.id)
+    d3
+      .forceLink(links)
+      .id((d) => d.id)
+      .distance(50)
   )
   .force("charge", d3.forceManyBody())
   .force(
@@ -40,62 +43,62 @@ svg
   .append("defs")
   .append("marker")
   .attr("id", "arrow")
-  .attr("refX", 16)
+  .attr("refX", 14)
   .attr("refY", 6)
-  .attr("markerWidth", 30)
-  .attr("markerHeight", 30)
+  .attr("markerWidth", 20)
+  .attr("markerHeight", 20)
   .attr("orient", "auto")
   .append("path")
   .attr("d", "M 0 0 12 6 0 12 3 6")
-  .style("fill", "white");
+  .style("fill", "#aaa");
 
-const link = svg
+const d3Links = svg
   .append("g")
-  .attr("stroke", "white")
+  .attr("stroke", "#aaa")
   .attr("marker-end", "url(#arrow)")
   .selectAll()
   .data(links)
   .join("line");
 
-const node = svg
+// Create nodes with label at the center by wrapping a circle and a text element
+// in a group. The animation is then done by modifying the `transform`
+// attribute of the group.
+const d3Nodes = svg
   .append("g")
   .selectAll("g")
   .data(nodes)
   .join("g")
   .attr("transform", (d) => "translate(" + d.x + "," + d.y + ")");
 
-const _node = node
+d3Nodes
   .append("circle")
-  .attr("r", 10)
-  .attr("stroke", "white")
-  .attr("fill", "none");
+  .attr("r", 3)
+  .attr("transform", (d) => "translate(0, 0)")
+  .attr("fill", "#fff");
 
-node
+d3Nodes
   .append("text")
-  .attr("stroke", "white")
-  .attr("x", (d) => d.x)
-  .attr("y", (d) => d.y)
+  .attr("fill", "white")
+  .attr("transform", "translate(10, 0)")
+  .attr("font-family", "Source Code Pro")
+  // .attr("text-anchor", "left")
+  // .attr("x", (d) => d.x)
+  // .attr("y", (d) => d.y)
   .text((d) => d.index);
 
 // Dragging behaviour and simulation loop.
-node.call(
+d3Nodes.call(
   d3.drag().on("start", dragStarted).on("drag", dragged).on("end", dragEnded)
 );
 
-window.addEventListener("resize", (event) => {
-  simulation.force("center").x(window.innerWidth / 2);
-  simulation.force("center").y(window.innerHeight / 2);
-  simulation.alphaTarget(0).restart();
-});
-
 function ticked() {
-  link
+  d3Links
     .attr("x1", (d) => d.source.x)
     .attr("y1", (d) => d.source.y)
     .attr("x2", (d) => d.target.x)
     .attr("y2", (d) => d.target.y);
 
-  node.attr("transform", (d) => "translate(" + d.x + "," + d.y + ")");
+  d3Nodes.attr("transform", (d) => "translate(" + d.x + "," + d.y + ")");
 }
 
 function dragStarted(event) {
@@ -114,5 +117,12 @@ function dragEnded(event) {
   event.subject.fx = null;
   event.subject.fy = null;
 }
+
+// Adjust the center of gravity when the window size changes.
+window.addEventListener("resize", (event) => {
+  simulation.force("center").x(window.innerWidth / 2);
+  simulation.force("center").y(window.innerHeight / 2);
+  simulation.alphaTarget(0).restart();
+});
 
 document.querySelector("main").append(svg.node());
