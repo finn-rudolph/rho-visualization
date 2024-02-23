@@ -3,8 +3,8 @@ import { getFunctionalGraph } from "./graph.js";
 
 let pInput = document.getElementById("pInput");
 let kInput = document.getElementById("kInput");
-pInput.value = 17;
-kInput.value = 1;
+pInput.value = 31;
+kInput.value = 5;
 
 // Make the input fields resize according to the user input.
 for (let input of [pInput, kInput]) {
@@ -26,12 +26,9 @@ const simulation = d3
       .distance(50)
   )
   .force("charge", d3.forceManyBody().strength(-100))
-  .force(
-    "center",
-    d3.forceCenter(window.innerWidth / 2, window.innerHeight / 2)
-  )
+  .force("x", d3.forceX(window.innerWidth / 2))
+  .force("y", d3.forceY(window.innerHeight / 2))
   .on("tick", ticked);
-
 const svg = d3
   .create("svg")
   .attr("height", "100%")
@@ -119,9 +116,10 @@ function dragEnded(event) {
 }
 
 // Adjust the center of gravity when the window size changes.
-window.addEventListener("resize", (event) => {
-  simulation.force("center").x(window.innerWidth / 2);
-  simulation.force("center").y(window.innerHeight / 2);
+window.addEventListener("resize", (_) => {
+  simulation.force("x").x(window.innerWidth / 2);
+  simulation.force("y").y(window.innerHeight / 2);
+  simulation.alpha(1);
   simulation.alphaTarget(0).restart();
 });
 
