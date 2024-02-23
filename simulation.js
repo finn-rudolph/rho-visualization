@@ -1,7 +1,7 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 import { getFunctionalGraph } from "./graph.js";
 
-function createSimulation(p, k) {
+export function createSimulation(p, k) {
   const svg = d3.select("svg");
   svg.selectAll("g").remove();
   const [nodes, links] = getFunctionalGraph(pInput.value, kInput.value);
@@ -117,30 +117,3 @@ svg
   .style("fill", "#bbb");
 
 document.querySelector("main").append(svg.node());
-
-let pInput = document.getElementById("pInput");
-let kInput = document.getElementById("kInput");
-let p = 69;
-let k = 1;
-pInput.value = p;
-kInput.value = k;
-
-// Make the input fields resize according to the user input.
-for (let input of [pInput, kInput]) {
-  input.addEventListener("input", () => {
-    input.style.width = input.value.length + "ch";
-  });
-  input.dispatchEvent(new Event("input"));
-}
-
-// If the user changes either p or k and presses `Enter`, the new graph is
-// generated.
-window.addEventListener("keydown", (event) => {
-  if (event.key === "Enter" && (pInput.value != p || kInput.value != k)) {
-    p = pInput.value;
-    k = kInput.value;
-    createSimulation(p, k);
-  }
-});
-
-createSimulation(p, k);
