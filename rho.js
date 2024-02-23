@@ -1,12 +1,24 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
+let pInput = document.getElementById("pInput");
+let kInput = document.getElementById("kInput");
+pInput.value = 17;
+kInput.value = 1;
+
+for (let input of [pInput, kInput]) {
+  console.log(input);
+  input.addEventListener("input", () => {
+    input.style.width = input.value.length + "ch";
+  });
+  input.dispatchEvent(new Event("input"));
+}
+
 // Specify the color scale.
 const color = d3.scaleOrdinal(d3.schemeCategory10);
 
 fetch("http://127.0.0.1:5500/miserables.json")
   .then((res) => res.json())
   .then((data) => {
-    console.log(data);
     // The force simulation mutates links and nodes, so create a copy
     // so that re-evaluating this cell produces the same result.
     const links = data.links.map((d) => ({ ...d }));
