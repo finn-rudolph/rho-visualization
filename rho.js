@@ -15,7 +15,7 @@ function createSimulation(p, k) {
         .id((d) => d.id)
         .distance(30)
     )
-    .force("charge", d3.forceManyBody().strength(-250))
+    .force("charge", d3.forceManyBody().strength(-240))
     .force("x", d3.forceX(window.innerWidth / 2))
     .force("y", d3.forceY(window.innerHeight / 2))
     .on("tick", () => {
@@ -27,7 +27,11 @@ function createSimulation(p, k) {
         .attr("y2", (d) => d.target.y);
 
       nodeBoxes.attr("transform", (d) => "translate(" + d.x + "," + d.y + ")");
-    });
+    })
+    .alpha(1.8)
+    .alphaDecay(0.01);
+
+  setTimeout(() => simulation.alphaDecay(0.0228), 5000);
 
   const lines = svg
     .append("g")
@@ -65,7 +69,7 @@ function createSimulation(p, k) {
     d3
       .drag()
       .on("start", (event) => {
-        if (!event.active) simulation.alphaTarget(0.4).restart();
+        if (!event.active) simulation.alphaTarget(0.3).restart();
         event.subject.fx = event.subject.x;
         event.subject.fy = event.subject.y;
       })
@@ -116,7 +120,7 @@ document.querySelector("main").append(svg.node());
 
 let pInput = document.getElementById("pInput");
 let kInput = document.getElementById("kInput");
-let p = 31;
+let p = 69;
 let k = 1;
 pInput.value = p;
 kInput.value = k;
