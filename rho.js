@@ -15,10 +15,6 @@ for (let input of [pInput, kInput]) {
 }
 
 const [nodes, links] = getFunctionalGraph(pInput.value, kInput.value);
-console.log(nodes);
-console.log(links);
-
-const color = d3.scaleOrdinal(d3.schemeCategory10);
 
 const simulation = d3
   .forceSimulation(nodes)
@@ -32,8 +28,6 @@ const simulation = d3
     d3.forceCenter(window.innerWidth / 2, window.innerHeight / 2)
   )
   .on("tick", ticked);
-
-console.log(links);
 
 const svg = d3
   .create("svg")
@@ -55,11 +49,9 @@ svg
   .attr("d", "M 0 0 12 6 0 12 3 6")
   .style("fill", "white");
 
-// Add a line for each link, and a circle for each node.
 const link = svg
   .append("g")
-  .attr("stroke", "#999")
-  .attr("stroke-opacity", 0.6)
+  .attr("stroke", "white")
   .attr("marker-end", "url(#arrow)")
   .selectAll()
   .data(links)
@@ -67,18 +59,25 @@ const link = svg
 
 const node = svg
   .append("g")
-  .attr("stroke", "#fff")
-  .attr("stroke-width", 1.5)
-  .selectAll()
+  .selectAll("g")
   .data(nodes)
-  .join("circle")
-  // .attr("marker-end", "url(#arrow)")
-  .attr("r", 5)
-  .attr("fill", (d) => color(d.group));
+  .join("g")
+  .attr("transform", (d) => "translate(" + d.x + "," + d.y + ")");
 
-node.append("title").text((d) => d.id);
+const _node = node
+  .append("circle")
+  .attr("r", 10)
+  .attr("stroke", "white")
+  .attr("fill", "none");
 
-// Add a drag behavior.
+node
+  .append("text")
+  .attr("stroke", "white")
+  .attr("x", (d) => d.x)
+  .attr("y", (d) => d.y)
+  .text((d) => d.index);
+
+// Dragging behaviour and simulation loop.
 node.call(
   d3.drag().on("start", dragStarted).on("drag", dragged).on("end", dragEnded)
 );
@@ -89,7 +88,6 @@ window.addEventListener("resize", (event) => {
   simulation.alphaTarget(0).restart();
 });
 
-// Set the position attributes of links and nodes each time the simulation ticks.
 function ticked() {
   link
     .attr("x1", (d) => d.source.x)
@@ -97,24 +95,20 @@ function ticked() {
     .attr("x2", (d) => d.target.x)
     .attr("y2", (d) => d.target.y);
 
-  node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+  node.attr("transform", (d) => "translate(" + d.x + "," + d.y + ")");
 }
 
-// Reheat the simulation when drag starts, and fix the subject position.
 function dragStarted(event) {
   if (!event.active) simulation.alphaTarget(0.3).restart();
   event.subject.fx = event.subject.x;
   event.subject.fy = event.subject.y;
 }
 
-// Update the subject (dragged node) position during drag.
 function dragged(event) {
   event.subject.fx = event.x;
   event.subject.fy = event.y;
 }
 
-// Restore the target alpha so the simulation cools after dragging ends.
-// Unfix the subject position now that it’s no longer being dragged.
 function dragEnded(event) {
   if (!event.active) simulation.alphaTarget(0);
   event.subject.fx = null;
