@@ -25,7 +25,7 @@ const simulation = d3
       .id((d) => d.id)
       .distance(50)
   )
-  .force("charge", d3.forceManyBody())
+  .force("charge", d3.forceManyBody().strength(-100))
   .force(
     "center",
     d3.forceCenter(window.innerWidth / 2, window.innerHeight / 2)
@@ -73,7 +73,7 @@ const d3Nodes = svg
 d3Nodes
   .append("circle")
   .attr("r", 3)
-  .attr("transform", (d) => "translate(0, 0)")
+  .attr("transform", "translate(0, 0)")
   .attr("fill", "#fff");
 
 d3Nodes
@@ -102,7 +102,7 @@ function ticked() {
 }
 
 function dragStarted(event) {
-  if (!event.active) simulation.alphaTarget(0.3).restart();
+  if (!event.active) simulation.alphaTarget(0.4).restart();
   event.subject.fx = event.subject.x;
   event.subject.fy = event.subject.y;
 }

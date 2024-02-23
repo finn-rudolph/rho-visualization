@@ -16,7 +16,7 @@ function modularExp(x, y, modulus) {
 // for use with D3. Returns an array of nodes and links, where nodes are just
 // identified by a number in 0..p - 1.
 export function getFunctionalGraph(p, k) {
-  let nodes = Array.from({ length: p }, (_, i) => Object.create({ id: i }));
+  let nodes = Array.from({ length: p }, (_, __) => Object.create({}));
   let links = Array(p);
   for (let i = 0; i < p; ++i) {
     links[i] = { source: nodes[i], target: nodes[modularExp(i, 2 * k, p)] };
