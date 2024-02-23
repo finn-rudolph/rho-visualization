@@ -3,8 +3,8 @@ import { getFunctionalGraph } from "./graph.js";
 
 let pInput = document.getElementById("pInput");
 let kInput = document.getElementById("kInput");
-pInput.value = 31;
-kInput.value = 5;
+pInput.value = 97;
+kInput.value = 2;
 
 // Make the input fields resize according to the user input.
 for (let input of [pInput, kInput]) {
@@ -23,12 +23,13 @@ const simulation = d3
     d3
       .forceLink(links)
       .id((d) => d.id)
-      .distance(50)
+      .distance(30)
   )
-  .force("charge", d3.forceManyBody().strength(-100))
+  .force("charge", d3.forceManyBody().strength(-250))
   .force("x", d3.forceX(window.innerWidth / 2))
   .force("y", d3.forceY(window.innerHeight / 2))
   .on("tick", ticked);
+
 const svg = d3
   .create("svg")
   .attr("height", "100%")
@@ -36,22 +37,23 @@ const svg = d3
   .attr("display", "block")
   .style("background", "black");
 
+// Define the arrow that goes at the tip of the edges.
 svg
   .append("defs")
   .append("marker")
   .attr("id", "arrow")
-  .attr("refX", 14)
-  .attr("refY", 6)
+  .attr("refX", 12)
+  .attr("refY", 5)
   .attr("markerWidth", 20)
   .attr("markerHeight", 20)
   .attr("orient", "auto")
   .append("path")
-  .attr("d", "M 0 0 12 6 0 12 3 6")
-  .style("fill", "#aaa");
+  .attr("d", "M 0 0 10 5 0 10 2.5 5")
+  .style("fill", "#bbb");
 
 const d3Links = svg
   .append("g")
-  .attr("stroke", "#aaa")
+  .attr("stroke", "#bbb")
   .attr("marker-end", "url(#arrow)")
   .selectAll()
   .data(links)
@@ -78,9 +80,6 @@ d3Nodes
   .attr("fill", "white")
   .attr("transform", "translate(10, 0)")
   .attr("font-family", "Source Code Pro")
-  // .attr("text-anchor", "left")
-  // .attr("x", (d) => d.x)
-  // .attr("y", (d) => d.y)
   .text((d) => d.index);
 
 // Dragging behaviour and simulation loop.
@@ -119,7 +118,7 @@ function dragEnded(event) {
 window.addEventListener("resize", (_) => {
   simulation.force("x").x(window.innerWidth / 2);
   simulation.force("y").y(window.innerHeight / 2);
-  simulation.alpha(1);
+  simulation.alpha(0.7);
   simulation.alphaTarget(0).restart();
 });
 
