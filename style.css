@@ -22,9 +22,6 @@ input[type="number"] {
 }
 
 footer {
-  background-color: rgba(255, 255, 255, 0.12);
-  padding: 0.3em 0.5em;
-  border-radius: 0.4em;
   color: white;
   position: fixed;
   bottom: 0.4em;
@@ -32,14 +29,24 @@ footer {
   font-family: "Noto Sans Mono", monospace;
 }
 
+div,
 button {
-  background: none;
-  border: none;
-  margin: 0;
-  padding: 0;
-  color: white;
+  margin-right: 0.3em;
+  border-radius: 0.4em;
+  padding: 0.3em 0.6em;
+  background-color: rgba(255, 255, 255, 0.12);
+  display: inline-block;
 }
 
-#yDisplay {
-  margin-right: 0.5em;
+button {
+  border: none;
+  border-radius: 0.3em;
+  color: white;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+button:hover {
+  background-color: white;
+  color: black;
 }

@@ -33,5 +33,7 @@ let x = 1;
 let y = 1;
 xDisplay.textContent = x;
 yDisplay.textContent = y;
+playButton.textContent = " > ";
+stepButton.textContent = " >> ";
 
 createSimulation(p, k, x, y);
