@@ -1,4 +1,4 @@
-export function modularExp(x, y, modulus) {
+function modularExp(x, y, modulus) {
   let res = 1;
   while (y != 0) {
     if ((y & 1) == 1) res = (res * x) % modulus;
@@ -6,6 +6,10 @@ export function modularExp(x, y, modulus) {
     y >>= 1;
   }
   return res;
+}
+
+export function successor(p, k, node) {
+  return (modularExp(node, 2 * k, p) + 1) % p;
 }
 
 // Generates the functional graph of
@@ -19,7 +23,7 @@ export function getFunctionalGraph(p, k) {
   let nodes = Array.from({ length: p }, (_, __) => Object.create({}));
   let links = Array(p);
   for (let i = 0; i < p; ++i) {
-    links[i] = { source: nodes[i], target: nodes[modularExp(i, 2 * k, p)] };
+    links[i] = { source: nodes[i], target: nodes[successor(p, k, i)] };
   }
   return [nodes, links];
 }

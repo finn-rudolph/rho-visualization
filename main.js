@@ -1,4 +1,4 @@
-import { createSimulation } from "./simulation.js";
+import { createSimulation, runOneStep } from "./simulation.js";
 
 const pInput = document.getElementById("p-input");
 const kInput = document.getElementById("k-input");
@@ -21,7 +21,7 @@ window.addEventListener("keydown", (event) => {
   if (event.key === "Enter" && (pInput.value != p || kInput.value != k)) {
     p = pInput.value;
     k = kInput.value;
-    createSimulation(p, k);
+    createSimulation(p, k, x, y);
   }
 });
 
@@ -33,7 +33,23 @@ let x = 1;
 let y = 1;
 xDisplay.textContent = x;
 yDisplay.textContent = y;
-playButton.textContent = " > ";
-stepButton.textContent = " >> ";
+playButton.textContent = ">";
+stepButton.textContent = ">>";
 
 createSimulation(p, k, x, y);
+
+let playing = false;
+
+playButton.addEventListener("click", () => {
+  if (playing) {
+    playButton.textContent = "||";
+  } else {
+    playButton.textContent = ">";
+  }
+  playing ^= 1;
+});
+
+stepButton.addEventListener("click", () => {
+  [x, y] = runOneStep(p, k, x, y);
+  console.log(x, y);
+});

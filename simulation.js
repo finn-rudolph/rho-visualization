@@ -1,5 +1,5 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
-import { modularExp, getFunctionalGraph } from "./graph.js";
+import { getFunctionalGraph, successor } from "./graph.js";
 
 export function createSimulation(p, k, x, y) {
   const svg = d3.select("svg");
@@ -99,12 +99,13 @@ export function createSimulation(p, k, x, y) {
   d3.selectAll("#nd-" + y).attr("fill", "#F525B7");
 }
 
+// TODO: if x = y, change color.
 export function runOneStep(p, k, x, y) {
-  const xNew = modularExp(x, 2 * k, p);
-  const yNew = modularExp(modularExp(y, 2 * k, p), 2 * k, p);
-  d3.select("#nd" + x).attr("fill", "white");
-  d3.select("#nd" + y).attr("fill", "white");
-  d3.select("#nd" + xNew).attr("fill", "#25F3F5");
+  const xNew = successor(p, k, x);
+  const yNew = successor(p, k, successor(p, k, y));
+  d3.select("#nd-" + x).attr("fill", "white");
+  d3.select("#nd-" + y).attr("fill", "white");
+  d3.select("#nd-" + xNew).attr("fill", "#25F3F5");
   d3.select("#nd-" + yNew).attr("fill", "#F525B7");
   return [xNew, yNew];
 }
