@@ -1,7 +1,7 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
-import { getFunctionalGraph } from "./graph.js";
+import { modularExp, getFunctionalGraph } from "./graph.js";
 
-export function createSimulation(p, k) {
+export function createSimulation(p, k, x, y) {
   const svg = d3.select("svg");
   svg.selectAll("g").remove();
   const [nodes, links] = getFunctionalGraph(pInput.value, kInput.value);
@@ -49,17 +49,19 @@ export function createSimulation(p, k) {
     .selectAll("g")
     .data(nodes)
     .join("g")
-    .attr("transform", (d) => "translate(" + d.x + "," + d.y + ")");
+    .attr("fill", "white")
+    .attr("transform", (d) => "translate(" + d.x + "," + d.y + ")")
+    .attr("id", (d) => "nd-" + d.index);
 
   nodeBoxes
     .append("circle")
     .attr("r", 3)
     .attr("transform", "translate(0, 0)")
-    .attr("fill", "#fff");
+    .attr("fill", "inherit");
 
   nodeBoxes
     .append("text")
-    .attr("fill", "white")
+    .attr("fill", "inherit")
     .attr("transform", "translate(10, 0)")
     .attr("font-family", "Source Code Pro")
     .text((d) => d.index);
@@ -92,6 +94,19 @@ export function createSimulation(p, k) {
     simulation.alpha(0.7);
     simulation.alphaTarget(0).restart();
   });
+
+  d3.selectAll("#nd-" + x).attr("fill", "#25F3F5");
+  d3.selectAll("#nd-" + y).attr("fill", "#F525B7");
+}
+
+export function runOneStep(p, k, x, y) {
+  const xNew = modularExp(x, 2 * k, p);
+  const yNew = modularExp(modularExp(y, 2 * k, p), 2 * k, p);
+  d3.select("#nd" + x).attr("fill", "white");
+  d3.select("#nd" + y).attr("fill", "white");
+  d3.select("#nd" + xNew).attr("fill", "#25F3F5");
+  d3.select("#nd-" + yNew).attr("fill", "#F525B7");
+  return [xNew, yNew];
 }
 
 // Set up the SVG and add it to the DOM.
@@ -117,3 +132,6 @@ svg
   .style("fill", "#bbb");
 
 document.querySelector("main").append(svg.node());
+
+const pInput = document.getElementById("p-input");
+const kInput = document.getElementById("k-input");

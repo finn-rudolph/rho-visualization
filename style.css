@@ -31,3 +31,15 @@ footer {
   left: 0.4em;
   font-family: "Noto Sans Mono", monospace;
 }
+
+button {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+
+#yDisplay {
+  margin-right: 0.5em;
+}

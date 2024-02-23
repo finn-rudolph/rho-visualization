@@ -1,7 +1,7 @@
 import { createSimulation } from "./simulation.js";
 
-let pInput = document.getElementById("pInput");
-let kInput = document.getElementById("kInput");
+const pInput = document.getElementById("p-input");
+const kInput = document.getElementById("k-input");
 let p = 69;
 let k = 1;
 pInput.value = p;
@@ -25,9 +25,13 @@ window.addEventListener("keydown", (event) => {
   }
 });
 
-createSimulation(p, k);
+const xDisplay = document.getElementById("x-display");
+const yDisplay = document.getElementById("y-display");
+const playButton = document.getElementById("play");
+const stepButton = document.getElementById("step");
+let x = 1;
+let y = 1;
+xDisplay.textContent = x;
+yDisplay.textContent = y;
 
-let xDisplay = document.getElementById("xDisplay");
-let yDisplay = document.getElementById("yDisplay");
-let playButton = document.getElementById("play");
-let stepButton = document.getElementById("step");
+createSimulation(p, k, x, y);

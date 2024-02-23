@@ -1,4 +1,4 @@
-function modularExp(x, y, modulus) {
+export function modularExp(x, y, modulus) {
   let res = 1;
   while (y != 0) {
     if ((y & 1) == 1) res = (res * x) % modulus;
