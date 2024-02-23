@@ -6,14 +6,12 @@ pInput.value = 17;
 kInput.value = 1;
 
 for (let input of [pInput, kInput]) {
-  console.log(input);
   input.addEventListener("input", () => {
     input.style.width = input.value.length + "ch";
   });
   input.dispatchEvent(new Event("input"));
 }
 
-// Specify the color scale.
 const color = d3.scaleOrdinal(d3.schemeCategory10);
 
 fetch("http://127.0.0.1:5500/miserables.json")
@@ -44,15 +42,28 @@ fetch("http://127.0.0.1:5500/miserables.json")
       .attr("display", "block")
       .style("background", "black");
 
+    svg
+      .append("defs")
+      .append("marker")
+      .attr("id", "arrow")
+      .attr("refX", 16)
+      .attr("refY", 6)
+      .attr("markerWidth", 30)
+      .attr("markerHeight", 30)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M 0 0 12 6 0 12 3 6")
+      .style("fill", "white");
+
     // Add a line for each link, and a circle for each node.
     const link = svg
       .append("g")
       .attr("stroke", "#999")
       .attr("stroke-opacity", 0.6)
+      .attr("marker-end", "url(#arrow)")
       .selectAll()
       .data(links)
-      .join("line")
-      .attr("stroke-width", (d) => Math.sqrt(d.value));
+      .join("line");
 
     const node = svg
       .append("g")
@@ -61,6 +72,7 @@ fetch("http://127.0.0.1:5500/miserables.json")
       .selectAll()
       .data(nodes)
       .join("circle")
+      // .attr("marker-end", "url(#arrow)")
       .attr("r", 5)
       .attr("fill", (d) => color(d.group));
 
