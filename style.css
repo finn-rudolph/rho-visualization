@@ -34,7 +34,7 @@ button {
   margin-right: 0.3em;
   border-radius: 0.4em;
   padding: 0.3em 0.6em;
-  background-color: rgba(255, 255, 255, 0.12);
+  background-color: rgb(37, 37, 37);
   display: inline-block;
 }
 
