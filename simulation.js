@@ -64,7 +64,7 @@ export function createSimulation(p, k) {
     .append("text")
     .attr("fill", "inherit")
     .attr("transform", "translate(10, 0)")
-    .attr("font-family", "Source Code Pro", "monospace")
+    .attr("font-family", "Noto Sans Mono", "monospace")
     .text((d) => d.index);
 
   // Implement dragging behaviour.
