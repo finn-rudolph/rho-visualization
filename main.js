@@ -1,6 +1,10 @@
 import { createSimulation, setNodeColor, setLabelColor } from "./simulation.js";
 import { successor } from "./graph.js";
 
+const X_COLOR = "#00E6FF";
+const Y_COLOR = "#FFE000";
+const SIM_INTERVAL = 1000;
+
 export const pInput = document.getElementById("p-input");
 export const kInput = document.getElementById("k-input");
 export const xDisplay = document.getElementById("x-display");
@@ -8,7 +12,7 @@ export const yDisplay = document.getElementById("y-display");
 const playButton = document.getElementById("play");
 const stepButton = document.getElementById("step");
 
-let p = 69;
+let p = 47;
 let k = 1;
 export let x, y;
 
@@ -18,7 +22,7 @@ kInput.value = k;
 playButton.textContent = ">";
 stepButton.textContent = ">>";
 
-let playing = false;
+let running = false;
 let intervalId;
 
 function nextXY(p, k, x, y) {
@@ -33,15 +37,30 @@ export function updateXY(newX, newY) {
     setLabelColor(y, "white");
   }
 
-  setNodeColor(newY, "#F525B7");
-  setNodeColor(newX, "#25F3F5");
-  setLabelColor(newX, "#25F3F5");
-  setLabelColor(newY, "#F525B7");
+  setNodeColor(newY, Y_COLOR);
+  setNodeColor(newX, X_COLOR);
+  setLabelColor(newX, X_COLOR);
+  setLabelColor(newY, Y_COLOR);
 
   xDisplay.textContent = newX;
   yDisplay.textContent = newY;
   x = newX;
   y = newY;
+}
+
+function startAlgorithm() {
+  playButton.textContent = "||";
+  intervalId = setInterval(() => {
+    updateXY(...nextXY(p, k, x, y));
+    if (x === y) stopAlgorithm();
+  }, SIM_INTERVAL);
+  running = true;
+}
+
+function stopAlgorithm() {
+  playButton.textContent = ">";
+  clearInterval(intervalId);
+  running = false;
 }
 
 // Make the input fields resize according to the user input.
@@ -58,8 +77,8 @@ window.addEventListener("keydown", (event) => {
   if (event.key === "Enter" && (pInput.value != p || kInput.value != k)) {
     p = pInput.value;
     k = kInput.value;
-    if (playing) {
-      playButton.dispatchEvent(new Event("click"));
+    if (running) {
+      stopAlgorithm();
     }
     createSimulation(p, k, x, y);
     updateXY(1, 1);
@@ -67,16 +86,8 @@ window.addEventListener("keydown", (event) => {
 });
 
 playButton.addEventListener("click", () => {
-  if (playing) {
-    playButton.textContent = ">";
-    clearInterval(intervalId);
-  } else {
-    playButton.textContent = "||";
-    intervalId = setInterval(() => {
-      updateXY(...nextXY(p, k, x, y));
-    }, 600);
-  }
-  playing ^= 1;
+  if (!running) startAlgorithm();
+  else stopAlgorithm();
 });
 
 stepButton.addEventListener("click", () => {
