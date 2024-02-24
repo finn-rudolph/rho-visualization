@@ -1,10 +1,11 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
-import { getFunctionalGraph, successor } from "./graph.js";
+import { getFunctionalGraph } from "./graph.js";
+import { updateXY } from "./main.js";
 
-export function createSimulation(p, k, x, y) {
+export function createSimulation(p, k) {
   const svg = d3.select("svg");
   svg.selectAll("g").remove();
-  const [nodes, links] = getFunctionalGraph(pInput.value, kInput.value);
+  const [nodes, links] = getFunctionalGraph(p, k);
 
   const simulation = d3
     .forceSimulation(nodes)
@@ -35,14 +36,14 @@ export function createSimulation(p, k, x, y) {
 
   const lines = svg
     .append("g")
-    .attr("stroke", "#bbb")
+    .attr("stroke", "#888")
     .attr("marker-end", "url(#arrow)")
     .selectAll()
     .data(links)
     .join("line");
 
-  // Create nodes with label at the center by wrapping a circle and a text element
-  // in a group. The animation is then done by modifying the `transform`
+  // Create nodes with label at the center by wrapping a circle and a text
+  // element in a group. The animation is then done by modifying the `transform`
   // attribute of the group.
   const nodeBoxes = svg
     .append("g")
@@ -87,6 +88,11 @@ export function createSimulation(p, k, x, y) {
       })
   );
 
+  nodeBoxes.on("click", (event) => {
+    const n = event.srcElement.__data__.index;
+    updateXY(n, n);
+  });
+
   // Adjust the center of gravity when the window size changes.
   window.addEventListener("resize", (_) => {
     simulation.force("x").x(window.innerWidth / 2);
@@ -94,20 +100,18 @@ export function createSimulation(p, k, x, y) {
     simulation.alpha(0.7);
     simulation.alphaTarget(0).restart();
   });
-
-  d3.selectAll("#nd-" + x).attr("fill", "#25F3F5");
-  d3.selectAll("#nd-" + y).attr("fill", "#F525B7");
 }
 
-// TODO: if x = y, change color.
-export function runOneStep(p, k, x, y) {
-  const xNew = successor(p, k, x);
-  const yNew = successor(p, k, successor(p, k, y));
-  d3.select("#nd-" + x).attr("fill", "white");
-  d3.select("#nd-" + y).attr("fill", "white");
-  d3.select("#nd-" + xNew).attr("fill", "#25F3F5");
-  d3.select("#nd-" + yNew).attr("fill", "#F525B7");
-  return [xNew, yNew];
+export function setNodeColor(i, color) {
+  d3.select("#nd-" + i)
+    .select("circle")
+    .attr("fill", color);
+}
+
+export function setLabelColor(i, color) {
+  d3.select("#nd-" + i)
+    .select("text")
+    .attr("fill", color);
 }
 
 // Set up the SVG and add it to the DOM.
@@ -130,9 +134,6 @@ svg
   .attr("orient", "auto")
   .append("path")
   .attr("d", "M 0 0 10 5 0 10 2.5 5")
-  .style("fill", "#bbb");
+  .style("fill", "#888");
 
 document.querySelector("main").append(svg.node());
-
-const pInput = document.getElementById("p-input");
-const kInput = document.getElementById("k-input");
