@@ -56,7 +56,7 @@ export function createSimulation(p, k) {
 
   nodeBoxes
     .append("circle")
-    .attr("r", 3)
+    .attr("r", 4)
     .attr("transform", "translate(0, 0)")
     .attr("fill", "inherit");
 
@@ -114,6 +114,18 @@ export function setLabelColor(i, color) {
     .attr("fill", color);
 }
 
+export function emphNode(i) {
+  const nodeBox = d3.select("#nd-" + i);
+  nodeBox.select("text").attr("font-weight", "800");
+  nodeBox.select("circle").attr("r", 6);
+}
+
+export function deemphNode(i) {
+  const nodeBox = d3.select("#nd-" + i);
+  nodeBox.select("text").attr("font-weight", "400");
+  nodeBox.select("circle").attr("r", 4);
+}
+
 // Set up the SVG and add it to the DOM.
 const svg = d3
   .create("svg")
@@ -141,7 +153,7 @@ svg
   .append("style")
   .attr("type", "text/css")
   .text(
-    "@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap')"
+    "@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap')"
   );
 
 document.querySelector("main").append(svg.node());

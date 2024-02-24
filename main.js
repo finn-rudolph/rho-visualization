@@ -1,4 +1,10 @@
-import { createSimulation, setNodeColor, setLabelColor } from "./simulation.js";
+import {
+  createSimulation,
+  setNodeColor,
+  setLabelColor,
+  deemphNode,
+  emphNode,
+} from "./simulation.js";
 import { successor } from "./graph.js";
 
 const X_COLOR = "#00E6FF";
@@ -35,12 +41,16 @@ export function updateXY(newX, newY) {
     setLabelColor(x, "white");
     setNodeColor(y, "white");
     setLabelColor(y, "white");
+    deemphNode(x);
+    deemphNode(y);
   }
 
   setNodeColor(newY, Y_COLOR);
   setNodeColor(newX, X_COLOR);
   setLabelColor(newX, X_COLOR);
   setLabelColor(newY, Y_COLOR);
+  emphNode(newX);
+  emphNode(newY);
 
   xDisplay.textContent = newX;
   yDisplay.textContent = newY;
