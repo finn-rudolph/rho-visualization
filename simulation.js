@@ -64,7 +64,7 @@ export function createSimulation(p, k) {
     .append("text")
     .attr("fill", "inherit")
     .attr("transform", "translate(10, 0)")
-    .attr("font-family", "Source Code Pro")
+    .attr("font-family", "Source Code Pro", "monospace")
     .text((d) => d.index);
 
   // Implement dragging behaviour.
@@ -135,5 +135,13 @@ svg
   .append("path")
   .attr("d", "M 0 0 10 5 0 10 2.5 5")
   .style("fill", "#888");
+
+svg
+  .append("defs")
+  .append("style")
+  .attr("type", "text/css")
+  .text(
+    "@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap')"
+  );
 
 document.querySelector("main").append(svg.node());
