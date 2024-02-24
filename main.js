@@ -58,11 +58,11 @@ window.addEventListener("keydown", (event) => {
   if (event.key === "Enter" && (pInput.value != p || kInput.value != k)) {
     p = pInput.value;
     k = kInput.value;
-    updateXY(1, 1);
     if (playing) {
       playButton.dispatchEvent(new Event("click"));
     }
     createSimulation(p, k, x, y);
+    updateXY(1, 1);
   }
 });
 
