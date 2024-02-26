@@ -22,12 +22,19 @@
   </head>
   <body>
     <main></main>
-    <button id="pseudocode-button">Pollard's Rho-Methode</button>
+    <button id="pseudocode-show">Pollard's Rho-Methode</button>
     <div id="pseudocode" , class="shaded">
-      <button id="pseudocode-back"><</button>
+      <button id="pseudocode-hide"><</button>
       <p id="pseudocode-content">
-        x = zufällige Zahl zwischen 0 und p - 1 <br />
-        y = x
+        x = zufällige Zahl zwischen 0 und n - 1 <br />
+        y = x <br />
+        while True:<br />
+        &nbsp; &nbsp; x = x<sup>2k</sup> + 1 <br />
+        &nbsp; &nbsp; y = y<sup>2k</sup> + 1 <br />
+        &nbsp; &nbsp; y = y<sup>2k</sup> + 1 <br />
+        &nbsp; &nbsp; g = gcd(n, y - x) <br />
+        &nbsp; &nbsp; if g &#x2260; 1 && g &#x2260; n: <br />
+        &nbsp; &nbsp; &nbsp; &nbsp; return g
       </p>
     </div>
     <footer>

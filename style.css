@@ -41,19 +41,19 @@ footer {
 }
 
 #pseudocode,
-#pseudocode-button {
+#pseudocode-show {
   position: fixed;
   top: 0.4em;
   left: 0.4em;
 }
 
-#pseudocode-button,
-#pseudocode-back {
+#pseudocode-show,
+#pseudocode-hide {
   background-color: rgba(0, 0, 0, 0);
 }
 
-#pseudocode-button:hover,
-#pseudocode-back:hover {
+#pseudocode-show:hover,
+#pseudocode-hide:hover {
   text-decoration: underline;
 }
 

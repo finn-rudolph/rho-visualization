@@ -109,9 +109,16 @@ stepButton.addEventListener("click", () => {
 createSimulation(p, k, x, y);
 updateXY(1, 1);
 
-const pseudocodeButton = document.getElementById("pseudocode-button");
+const pseudocodeShow = document.getElementById("pseudocode-show");
 const pseudocode = document.getElementById("pseudocode");
-pseudocodeButton.addEventListener("click", () => {
+const pseudocodeHide = document.getElementById("pseudocode-hide");
+
+pseudocodeShow.addEventListener("click", () => {
   pseudocode.style.visibility = "visible";
-  pseudocodeButton.style.visibility = "hidden";
+  pseudocodeShow.style.visibility = "hidden";
+});
+
+pseudocodeHide.addEventListener("click", () => {
+  pseudocode.style.visibility = "hidden";
+  pseudocodeShow.style.visibility = "visible";
 });
