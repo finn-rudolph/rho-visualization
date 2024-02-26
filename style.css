@@ -49,12 +49,13 @@ footer {
 
 #pseudocode-show,
 #pseudocode-hide {
+  text-decoration: underline;
   background-color: rgba(0, 0, 0, 0);
 }
 
 #pseudocode-show:hover,
 #pseudocode-hide:hover {
-  text-decoration: underline;
+  color: darkorchid;
 }
 
 #pseudocode {
