@@ -17,8 +17,9 @@ export const xDisplay = document.getElementById("x-display");
 export const yDisplay = document.getElementById("y-display");
 const playButton = document.getElementById("play");
 const stepButton = document.getElementById("step");
+const exponent = document.getElementById("exponent");
 
-let p = 47;
+let p = 71;
 let k = 1;
 export let x, y;
 
@@ -87,6 +88,7 @@ window.addEventListener("keydown", (event) => {
   if (event.key === "Enter" && (pInput.value != p || kInput.value != k)) {
     p = pInput.value;
     k = kInput.value;
+    exponent.textContent = 2 * k;
     if (running) {
       stopAlgorithm();
     }

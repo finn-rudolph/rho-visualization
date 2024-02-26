@@ -29,13 +29,16 @@ footer {
   font-family: "Noto Sans Mono", monospace;
 }
 
-div,
-button {
+.second-row {
   margin-right: 0.3em;
   border-radius: 0.4em;
   padding: 0.3em 0.6em;
   background-color: rgb(37, 37, 37);
   display: inline-block;
+}
+
+#f-display {
+  margin: 0.6em;
 }
 
 button {
