@@ -4,6 +4,8 @@ main {
   margin: 0;
   padding: 0;
   height: 100%;
+  font-family: "Noto Sans Mono", monospace;
+  color: white;
 }
 
 input::-webkit-outer-spin-button,
@@ -22,19 +24,47 @@ input[type="number"] {
 }
 
 footer {
-  color: white;
   position: fixed;
   bottom: 0.4em;
   left: 0.4em;
-  font-family: "Noto Sans Mono", monospace;
 }
 
 .second-row {
   margin-right: 0.3em;
+  display: inline-block;
+}
+
+.shaded {
+  background-color: rgb(37, 37, 37);
   border-radius: 0.4em;
   padding: 0.3em 0.6em;
-  background-color: rgb(37, 37, 37);
-  display: inline-block;
+}
+
+#pseudocode,
+#pseudocode-button {
+  position: fixed;
+  top: 0.4em;
+  left: 0.4em;
+}
+
+#pseudocode-button,
+#pseudocode-back {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+#pseudocode-button:hover,
+#pseudocode-back:hover {
+  text-decoration: underline;
+}
+
+#pseudocode {
+  visibility: hidden;
+  padding: 1em;
+}
+
+#pseudocode-content {
+  padding-left: 0.3em;
+  padding-right: 0.3em;
 }
 
 #f-display {
@@ -43,13 +73,16 @@ footer {
 
 button {
   border: none;
-  border-radius: 0.3em;
-  color: white;
+  color: inherit;
   font-family: inherit;
   font-size: inherit;
 }
 
-button:hover {
+button.shaded {
+  border-radius: 0.3em;
+}
+
+button.shaded:hover {
   background-color: white;
   color: black;
 }

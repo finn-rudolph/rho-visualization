@@ -22,15 +22,23 @@
   </head>
   <body>
     <main></main>
+    <button id="pseudocode-button">Pollard's Rho-Methode</button>
+    <div id="pseudocode" , class="shaded">
+      <button id="pseudocode-back"><</button>
+      <p id="pseudocode-content">
+        x = zufällige Zahl zwischen 0 und p - 1 <br />
+        y = x
+      </p>
+    </div>
     <footer>
-      <div id="f-display">f(x) = x<sup id="exponent">2</sup> + 1</div>
-      <div class="second-row">
+      <p id="f-display">f(x) = x<sup id="exponent">2</sup> + 1</p>
+      <div class="second-row shaded">
         p = <input type="number" , id="p-input" />, k =
         <input type="number" , id="k-input" />
         | x = <span id="x-display"></span>, y = <span id="y-display"></span>
       </div>
-      <button id="play" class="second-row"></button>
-      <button id="step" class="second-row"></button>
+      <button id="play" class="second-row shaded"></button>
+      <button id="step" class="second-row shaded"></button>
     </footer>
     <script src="main.js" , type="module"></script>
   </body>
