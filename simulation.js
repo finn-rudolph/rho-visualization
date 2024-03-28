@@ -2,10 +2,10 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 import { getFunctionalGraph } from "./graph.js";
 import { updateXY } from "./main.js";
 
-export function createSimulation(p, k) {
+export function createSimulation(p, k, c) {
   const svg = d3.select("svg");
   svg.selectAll("g").remove();
-  const [nodes, links] = getFunctionalGraph(p, k);
+  const [nodes, links] = getFunctionalGraph(p, k, c);
 
   const simulation = d3
     .forceSimulation(nodes)

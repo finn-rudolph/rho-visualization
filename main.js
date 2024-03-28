@@ -13,18 +13,22 @@ const SIM_INTERVAL = 1000;
 
 export const pInput = document.getElementById("p-input");
 export const kInput = document.getElementById("k-input");
+export const cInput = document.getElementById("c-input");
 export const xDisplay = document.getElementById("x-display");
 export const yDisplay = document.getElementById("y-display");
 const playButton = document.getElementById("play");
 const stepButton = document.getElementById("step");
 const exponent = document.getElementById("exponent");
+const constant = document.getElementById("constant");
 
 let p = 71;
 let k = 1;
+let c = 1;
 export let x, y;
 
 pInput.value = p;
 kInput.value = k;
+cInput.value = c;
 
 playButton.textContent = ">";
 stepButton.textContent = ">>";
@@ -32,8 +36,8 @@ stepButton.textContent = ">>";
 let running = false;
 let intervalId;
 
-function nextXY(p, k, x, y) {
-  return [successor(p, k, x), successor(p, k, successor(p, k, y))];
+function nextXY(p, k, c, x, y) {
+  return [successor(p, k, c, x), successor(p, k, c, successor(p, k, c, y))];
 }
 
 export function updateXY(newX, newY) {
@@ -62,7 +66,7 @@ export function updateXY(newX, newY) {
 function startAlgorithm() {
   playButton.textContent = "||";
   intervalId = setInterval(() => {
-    updateXY(...nextXY(p, k, x, y));
+    updateXY(...nextXY(p, k, c, x, y));
     if (x === y) stopAlgorithm();
   }, SIM_INTERVAL);
   running = true;
@@ -75,24 +79,29 @@ function stopAlgorithm() {
 }
 
 // Make the input fields resize according to the user input.
-for (let input of [pInput, kInput]) {
+for (let input of [pInput, kInput, cInput]) {
   input.addEventListener("input", () => {
     input.style.width = input.value.length + "ch";
   });
   input.dispatchEvent(new Event("input"));
 }
 
-// If the user changes either p or k and presses `Enter`, the new graph is
+// If the user changes either p, k or c and presses `Enter`, the new graph is
 // generated.
 window.addEventListener("keydown", (event) => {
-  if (event.key === "Enter" && (pInput.value != p || kInput.value != k)) {
-    p = pInput.value;
-    k = kInput.value;
+  if (
+    event.key === "Enter" &&
+    (pInput.value != p || kInput.value != k || cInput.value != c)
+  ) {
+    p = parseInt(pInput.value);
+    k = parseInt(kInput.value);
+    c = parseInt(cInput.value);
     exponent.textContent = 2 * k;
+    constant.textContent = c;
     if (running) {
       stopAlgorithm();
     }
-    createSimulation(p, k, x, y);
+    createSimulation(p, k, c);
     updateXY(1, 1);
   }
 });
@@ -103,10 +112,10 @@ playButton.addEventListener("click", () => {
 });
 
 stepButton.addEventListener("click", () => {
-  updateXY(...nextXY(p, k, x, y));
+  updateXY(...nextXY(p, k, c, x, y));
 });
 
-createSimulation(p, k, x, y);
+createSimulation(p, k, c);
 updateXY(1, 1);
 
 const pseudocodeShow = document.getElementById("pseudocode-show");
