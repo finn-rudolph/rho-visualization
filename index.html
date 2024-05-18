@@ -22,7 +22,7 @@
 
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
   </head>
   <body>
@@ -30,16 +30,16 @@
     <button id="pseudocode-show">Pollard's Rho-Methode</button>
     <div id="pseudocode">
       <button id="pseudocode-hide">
-        <span class="material-symbols-rounded"> arrow_back </span>
+        <span class="material-symbols-outlined"> arrow_back </span>
       </button>
       <p id="pseudocode-content">
-        x = zufällige Zahl zwischen 0 und n - 1 <br />
+        x = zufällige Zahl zwischen 0 und n – 1 <br />
         y = x <br />
         while True:<br />
         &nbsp; &nbsp; x = x<sup>2k</sup> + 1 <br />
         &nbsp; &nbsp; y = y<sup>2k</sup> + 1 <br />
         &nbsp; &nbsp; y = y<sup>2k</sup> + 1 <br />
-        &nbsp; &nbsp; g = gcd(n, y - x) <br />
+        &nbsp; &nbsp; g = gcd(n, y – x) <br />
         &nbsp; &nbsp; if g &#x2260; 1 && g &#x2260; n: <br />
         &nbsp; &nbsp; &nbsp; &nbsp; return g
       </p>
@@ -54,10 +54,10 @@
         <input type="number" , id="c-input" />, &nbsp; x =
         <span id="x-display"></span>, &nbsp; y = <span id="y-display"></span>
         <button class="second-row">
-          <span id="play" class="material-symbols-rounded"> play_arrow </span>
+          <span id="play" class="material-symbols-outlined"> play_arrow </span>
         </button>
         <button id="step" class="second-row">
-          <span class="material-symbols-rounded"> skip_next </span>
+          <span class="material-symbols-outlined"> skip_next </span>
         </button>
       </div>
     </footer>
