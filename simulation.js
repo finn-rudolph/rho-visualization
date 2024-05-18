@@ -2,6 +2,8 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 import { getFunctionalGraph } from "./graph.js";
 import { updateXY } from "./main.js";
 
+const BG_COLOR = "#19181E";
+
 export function createSimulation(p, k, c) {
   const svg = d3.select("svg");
   svg.selectAll("g").remove();
@@ -64,7 +66,7 @@ export function createSimulation(p, k, c) {
     .append("text")
     .attr("fill", "inherit")
     .attr("transform", "translate(10, 0)")
-    .attr("font-family", "Noto Sans Mono", "monospace")
+    .attr("font-family", "Jost", "monospace")
     .text((d) => d.index);
 
   // Implement dragging behaviour.
@@ -132,7 +134,7 @@ const svg = d3
   .attr("height", "100%")
   .attr("width", "100%")
   .attr("display", "block")
-  .style("background", "black");
+  .style("background", BG_COLOR);
 
 // Define the arrow that goes at the tip of the edges.
 svg
@@ -153,7 +155,7 @@ svg
   .append("style")
   .attr("type", "text/css")
   .text(
-    "@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap')"
+    "@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap')"
   );
 
 document.querySelector("main").append(svg.node());

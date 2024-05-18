@@ -4,7 +4,7 @@ main {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: "Noto Sans Mono", monospace;
+  font-family: "Jost", monospace;
   color: white;
 }
 
@@ -35,9 +35,7 @@ footer {
 }
 
 .shaded {
-  background-color: rgb(37, 37, 37);
-  border-radius: 0.4em;
-  padding: 0.3em 0.6em;
+  padding: 0.4em 0.4em 0.1em 0.4em;
 }
 
 #pseudocode,
@@ -45,17 +43,6 @@ footer {
   position: fixed;
   top: 0.4em;
   left: 0.4em;
-}
-
-#pseudocode-show,
-#pseudocode-hide {
-  text-decoration: underline;
-  background-color: rgba(0, 0, 0, 0);
-}
-
-#pseudocode-show:hover,
-#pseudocode-hide:hover {
-  color: darkorchid;
 }
 
 #pseudocode {
@@ -73,17 +60,15 @@ footer {
 }
 
 button {
+  background-color: rgba(0, 0, 0, 0);
   border: none;
   color: inherit;
   font-family: inherit;
   font-size: inherit;
-}
-
-button.shaded {
   border-radius: 0.3em;
 }
 
-button.shaded:hover {
+button:hover {
   background-color: white;
   color: black;
 }

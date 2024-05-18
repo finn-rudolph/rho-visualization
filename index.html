@@ -16,8 +16,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
   </head>
   <body>
@@ -45,12 +50,16 @@
         p =
         <input type="number" , id="p-input" />, k =
         <input type="number" , id="k-input" />, c =
-        <input type="number" , id="c-input" /> | x =
+        <input type="number" , id="c-input" />, x =
         <span id="x-display"></span>, y =
         <span id="y-display"></span>
       </div>
-      <button id="play" class="second-row shaded"></button>
-      <button id="step" class="second-row shaded"></button>
+      <button class="second-row shaded">
+        <span id="play" class="material-symbols-rounded"> play_arrow </span>
+      </button>
+      <button id="step" class="second-row shaded">
+        <span class="material-symbols-rounded"> skip_next </span>
+      </button>
     </footer>
     <script src="main.js" , type="module"></script>
   </body>

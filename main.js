@@ -30,9 +30,6 @@ pInput.value = p;
 kInput.value = k;
 cInput.value = c;
 
-playButton.textContent = ">";
-stepButton.textContent = ">>";
-
 let running = false;
 let intervalId;
 
@@ -64,7 +61,7 @@ export function updateXY(newX, newY) {
 }
 
 function startAlgorithm() {
-  playButton.textContent = "||";
+  playButton.textContent = "pause";
   intervalId = setInterval(() => {
     updateXY(...nextXY(p, k, c, x, y));
     if (x === y) stopAlgorithm();
@@ -73,7 +70,7 @@ function startAlgorithm() {
 }
 
 function stopAlgorithm() {
-  playButton.textContent = ">";
+  playButton.textContent = "play_arrow";
   clearInterval(intervalId);
   running = false;
 }
