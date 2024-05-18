@@ -30,7 +30,13 @@ footer {
 }
 
 .second-row {
+  height: inherit;
   display: inline-block;
+}
+
+#control {
+  display: flex;
+  align-items: center;
 }
 
 #y-display {
@@ -47,6 +53,9 @@ footer {
 #pseudocode {
   visibility: hidden;
   padding: 1em;
+  border: 0.1em solid white;
+  border-radius: 1em;
+  background-color: #25252f;
 }
 
 #pseudocode-content {
@@ -62,6 +71,10 @@ button {
   font-size: inherit;
   border-radius: 0.3em;
   padding: 0.4em 0.4em 0.1em 0.4em;
+}
+
+#pseudocode-show {
+  padding-bottom: 0.4em;
 }
 
 button:hover {

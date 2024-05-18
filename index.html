@@ -28,8 +28,10 @@
   <body>
     <main></main>
     <button id="pseudocode-show">Pollard's Rho-Methode</button>
-    <div id="pseudocode" , class="shaded">
-      <button id="pseudocode-hide"><</button>
+    <div id="pseudocode">
+      <button id="pseudocode-hide">
+        <span class="material-symbols-rounded"> arrow_back </span>
+      </button>
       <p id="pseudocode-content">
         x = zufällige Zahl zwischen 0 und n - 1 <br />
         y = x <br />
@@ -46,20 +48,18 @@
       <p id="f-display">
         f(x) = x<sup id="exponent">2</sup> + <span id="constant">1</span>
       </p>
-      <div class="second-row">
-        p =
-        <input type="number" , id="p-input" />, k =
-        <input type="number" , id="k-input" />, c =
-        <input type="number" , id="c-input" />, x =
-        <span id="x-display"></span>, y =
-        <span id="y-display"></span>
+      <div id="control">
+        p = <input type="number" , id="p-input" />, &nbsp; k =
+        <input type="number" , id="k-input" />, &nbsp; c =
+        <input type="number" , id="c-input" />, &nbsp; x =
+        <span id="x-display"></span>, &nbsp; y = <span id="y-display"></span>
+        <button class="second-row">
+          <span id="play" class="material-symbols-rounded"> play_arrow </span>
+        </button>
+        <button id="step" class="second-row">
+          <span class="material-symbols-rounded"> skip_next </span>
+        </button>
       </div>
-      <button class="second-row">
-        <span id="play" class="material-symbols-rounded"> play_arrow </span>
-      </button>
-      <button id="step" class="second-row">
-        <span class="material-symbols-rounded"> skip_next </span>
-      </button>
     </footer>
     <script src="main.js" , type="module"></script>
   </body>
