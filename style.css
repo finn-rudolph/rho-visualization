@@ -25,24 +25,23 @@ input[type="number"] {
 
 footer {
   position: fixed;
-  bottom: 0.4em;
-  left: 0.4em;
+  bottom: 1em;
+  left: 1em;
 }
 
 .second-row {
-  margin-right: 0.3em;
   display: inline-block;
 }
 
-.shaded {
-  padding: 0.4em 0.4em 0.1em 0.4em;
+#y-display {
+  margin-right: 1em;
 }
 
 #pseudocode,
 #pseudocode-show {
   position: fixed;
-  top: 0.4em;
-  left: 0.4em;
+  top: 1em;
+  left: 1em;
 }
 
 #pseudocode {
@@ -55,10 +54,6 @@ footer {
   padding-right: 0.3em;
 }
 
-#f-display {
-  margin: 0.6em;
-}
-
 button {
   background-color: rgba(0, 0, 0, 0);
   border: none;
@@ -66,6 +61,7 @@ button {
   font-family: inherit;
   font-size: inherit;
   border-radius: 0.3em;
+  padding: 0.4em 0.4em 0.1em 0.4em;
 }
 
 button:hover {

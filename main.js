@@ -7,8 +7,8 @@ import {
 } from "./simulation.js";
 import { successor } from "./graph.js";
 
-const X_COLOR = "#00E6FF";
-const Y_COLOR = "#FFE000";
+const X_COLOR = "#1DE4FF";
+const Y_COLOR = "#FFE043";
 const SIM_INTERVAL = 1000;
 
 export const pInput = document.getElementById("p-input");
