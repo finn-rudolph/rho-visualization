@@ -2,7 +2,7 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 import { getFunctionalGraph } from "./graph.js";
 import { updateXY } from "./main.js";
 
-const BG_COLOR = "#19181E";
+const BG_COLOR = "#0C0C0F";
 
 export function createSimulation(p, k, c) {
   const svg = d3.select("svg");
@@ -119,12 +119,14 @@ export function setLabelColor(i, color) {
 export function emphNode(i) {
   const nodeBox = d3.select("#nd-" + i);
   nodeBox.select("text").attr("font-weight", "800");
-  nodeBox.select("circle").attr("r", 6);
+  nodeBox.select("text").attr("font-size", "1.618em");
+  nodeBox.select("circle").attr("r", 10);
 }
 
 export function deemphNode(i) {
   const nodeBox = d3.select("#nd-" + i);
   nodeBox.select("text").attr("font-weight", "400");
+  nodeBox.select("text").attr("font-size", "1em");
   nodeBox.select("circle").attr("r", 4);
 }
 
